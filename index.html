@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="icon" href="https://img.icons8.com/color/48/000000/filter-and-sort.png">
+    <link rel="stylesheet" type="text/css" href="css/sorter.css"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/sorter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <title>Sort Algorithm Visualizer</title>
+</head>
+<body style="overflow-x: hidden">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://img.icons8.com/color/48/000000/filter-and-sort.png"/>
+            </a>
+            <a class="navbar-brand" href="#">Sort Algorithm Visualizer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <center>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Logarithmic Sorts</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><button class="dropdown-item" onclick="setSortType('Quick')">Quick Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Merge')">Merge Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Heap')">Heap Sort</button></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quadratic Sorts</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><button class="dropdown-item" onclick="setSortType('Bubble')">Bubble Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Selection')">Selection Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Insertion')">Insertion Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Gnome')">Gnome Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Shaker')">Shaker Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Odd Even')">Odd Even Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Pancake')">Pancake Sort</button></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Special Sorts</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><button class="dropdown-item" onclick="setSortType('Bitconic')">Bitconic Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Radix')">Radix Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Shell')">Shell Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Comb')">Comb Sort</button></li>
+                            <li><button class="dropdown-item" onclick="setSortType('Bogo')">Bogo Sort</a></li>
+                        </ul>
+                    </li>
+                </ul>
+        </center>
+    </div>
+        </div>
+    </nav>
+
+    <center>
+        <b>
+            <h1 id="sort" style="margin-top: 6vh; display: inline-block; font-size: 3em;">Quick Sort</h1>
+        </b>
+
+        <div class="container-fluid" id="numbars"></div>
+
+        <div style="margin-top: 0.5vh ;">
+            <button id="button1" onclick="sortHandler()" type="button" class="btn btn-primary btn-lg">Sort</button>
+            <button id="button2" onclick="initLines()" type="button" class="btn btn-primary btn-lg">Randomize</button>
+        </div>
+
+    </center>
+
+    <div id="description"></div>
+
+</body>
+</html>
