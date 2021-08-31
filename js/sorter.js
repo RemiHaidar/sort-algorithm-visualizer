@@ -101,7 +101,7 @@ function sortHandler()
 
 function description(bCase, aCase, wCase, sComp, desc, cCode, pCode)
 {
-    let code = '<div class="container-lg" style="margin-top: 3vh; margin-bottom: 20vh;"><div class="row"><div class="col-sm"><table class="table table-dark table-striped table-bordered table-hover"><th colspan="2" class="table-active"><center>Time Complexity</center></th><tbody><tr><th scope="row">Best Case</th><th>' + bCase + '</th></tr><tr><th scope="row">Average Case</th><th>' + aCase + '</th></tr><tr><th scope="row">Worst Case</th><th>' + wCase + '</th></tr><th colspan="2" class="table-active"><center>Space Complexity</center></th><tr><th scope="row">Space Complexity</th><th>' + sComp + '</th></tr><th colspan="2" class="table-active"><center>Description</center></th><tr><td colspan="2">' + desc + '</td></tr></tbody></table></div><div class="col-sm" ><div class="card text"><div class="card-header"><ul class="nav nav-tabs card-header-tabs"><li class="nav-item"><button class="nav-link active" id="c++" onclick="implementationHandler()">C++</button></li><li class="nav-item"><button class="nav-link" id="python" onclick="implementationHandler()">Python</button></li></ul></div><div class="card-body"><pre id="cImplementation">' + cCode + '</pre><pre id="pImplementation" style="visibility: hidden; display : none">' + pCode + '</pre></div></div></div></div></div>';
+    let code = '<div style="width: 80%; margin-top: 5vh;" class="container-fluid"><div class="row"><div class="col-sm"><table class="table table-dark table-striped table-bordered table-hover" style="table-layout: fixed;"><th colspan="2" class="table-active"><center>Time Complexity</center></th><tbody><tr><th>Best Case</th><th>' + bCase + '</th></tr><tr><th>Average Case</th><th>' + aCase + '</th></tr><tr><th>Worst Case</th><th>' + wCase + '</th></tr><th colspan="2" class="table-active"><center>Space Complexity</center></th><tr><th>Space Complexity</th><th>' + sComp + '</th></tr></tbody></table></div><div class="col-sm"><div class="card"><div class="card-body"><center><h3 class="card-title">Description</h3></center><h5><p class="card-text">' + desc + '</p></h5></div></div></div></div></div><br><br><br><br></br>';
     return code;
 }
 
@@ -114,9 +114,7 @@ function descriptionHandler()
                 "O (n × log n)",
                 "O (n<sup>2</sup>)",
                 "O (n)", 
-                "The bubble sort is a quadratic sorting algorithm. It is based on the comparison of all adjacent elements which are swapped if they are not in order. It is not efficient for large sets of data.", 
-                "void bubbleSort(std::vector&lt;int&gt;& array) {\n\tfor (int i = 0; i < array.size(); i++) {\n\t\tfor (int j = i + 1; j < array.size(); j++) {\n\t\t\tif (array[i] > array[j]) {\n\t\t\t\tint temp = array[i];\n\t\t\t\tarray[i] = array[j];\n\t\t\t\tarray[j] = temp;\n\t\t\t}\n\t\t}\n\t}\n}\n",
-                "def bubbleSort(array):\n\tlength = len(array)\n\tfor i in range(length-1):\n\t\tfor j in range(0, length-i-1):\n\t\t\tif array[j] > array[j+1]:\n\t\t\t\tarr[j], array[j+1] = array[j+1], array[j]\n\n\n"
+                "The bubble sort is a quadratic sorting algorithm. It is based on the comparison of all adjacent elements which are swapped if they are not in order. It is not efficient for large sets of data."
             );
             break;
 
@@ -126,9 +124,7 @@ function descriptionHandler()
                 "O (n<sup>2</sup>)",
                 "O (n<sup>2</sup>)",
                 "O (1)", 
-                "The selection sort is a quadratic sorting algorithm. It is based on the placement of the smallest or biggest element at the beginning of the array. It is not efficient for large sets of data.", 
-                "void selectionSort(std::vector&lt;int&gt;& array) {\n\tint min_index;\n\tfor (int i = 0; i < array.size() - 1; i++) {\n\t\tmin_index = i;\n\t\tfor (int j = i + 1; j < array.size(); j++) {\n\t\t\tif (array[j] < array[min_index]) {\n\t\t\t\tmin_index = j;\n\t\t\t}\n\n\t\t\tint temp = array[min_index];\n\t\t\tarray[min_index] = array[i];\n\t\t\tarray[i] = temp;\n\t\t}\n\t}\n}\n",
-                "def selectionSort(array):\n\tlength = len(array)\n\tfor i in range(length):\n\t\tmin_index = i\n\t\tfor j in range(i + 1, length):\n\t\t\tif array[min_index] > array[j]:\n\t\t\t\tarr[i], array[min_index] = array[min_index], array[i]\n\n\n"
+                "The selection sort is a quadratic sorting algorithm. It is based on the placement of the smallest or biggest element at the beginning of the array. It is not efficient for large sets of data."
             );
             break;
 
@@ -138,9 +134,7 @@ function descriptionHandler()
                 "O (n<sup>2</sup>)",
                 "O (n<sup>2</sup>)",
                 "O (1)", 
-                "The insertion sort is a quadratic sorting algorithm. It virtually splits the array into a into two sublists : a sorted one and an unsorted one. The algorithm takes an element from the unsorted list and correctly places it in the other list. It  is not efficient for large sets of data.", 
-                "void insertionSort(std::vector&lt;int&gt;& array) {\n\tint key, j;\n\tfor (int i = 1; i < array.size(); i++) {\n\t\tkey = array[i];\n\t\tj = i - 1;\n\t\twhile (j >= 0 && array[j] > key) {\n\t\t\tarray[j + 1] = array[j];\n\t\t\tj -= 1;\n\t\t}\n\t\tarray[j + 1] = key;\n\t}\n}\n",
-                "def inertionSort(array):\n\tlength = len(array)\n\tfor i in range(1, length):\n\t\tkey = array[i]\n\t\tj = i - 1\n\t\twhile j >= 0 and key < array[j]:\n\t\t\tarray[j + 1] = array[j]\n\t\t\tj -= 1\n\t\tarray[j + 1] = key\n\n"
+                "The insertion sort is a quadratic sorting algorithm. It virtually splits the array into a into two sublists : a sorted one and an unsorted one. The algorithm takes an element from the unsorted list and correctly places it in the other list. It  is not efficient for large sets of data."
             );
             break;
 
@@ -150,9 +144,7 @@ function descriptionHandler()
                 "O (n<sup>2</sup>)",
                 "O (n<sup>2</sup>)",
                 "O (1)",
-                "The gnome sort is a quadratic sorting algorithm. It is based on the way a garden gnome sorts his flower pots and is similar to the insertion sort. The algorithm compares adjacent elements and advances if they are in order or retreats if they are not.",
-                "void gnomeSort(std::vector&lt;int&gt;& array) { \n\tint index = 0;\n\twhile (index < array.size()) {\n\t\tif (index == 0)\n\t\t\tindex++;\n\t\tif (array[index] >= array[index - 1])\n\t\t\tindex++;\n\t\telse {\n\t\t\tint temp = array[index];\n\t\t\tarray[index] = array[index - 1];\n\t\t\tarray[index - 1] = temp;\n\t\t}\n\t}\n}",
-                "def gnomeSort(array):\n\tlength = len(array)\n\tindex = 0\n\twhile index < length:\n\t\tif index == 0:\n\t\t\tindex = index + 1\n\t\tif array[index] >= array[index - 1]:\n\t\t\tindex = index + 1\n\t\telse:\n\t\t\tarr[index], array[index-1] = array[index-1], array[index]\n\t\t\tindex = index - 1\n"
+                "The gnome sort is a quadratic sorting algorithm. It is based on the way a garden gnome sorts his flower pots and is similar to the insertion sort. The algorithm compares adjacent elements and advances if they are in order or retreats if they are not."
             );
             break;
 
@@ -162,9 +154,7 @@ function descriptionHandler()
                 "O (n<sup>2</sup>)",
                 "O (n<sup>2</sup>)",
                 "O (1)",
-                "The shaker sort is a quadratic sorting algorithm. It is an extension of the bubble sort. In fact, it does not only take the bigger elements to the end of the list but also alternates by bringing the smaller elements to the beginning of the list.",
-                "void shakerSort(std::vector&lt;int&gt;& array) {\n\tbool sorted = true;\n\twhile (sorted) {\n\t\tfor (int i = 0; i< array.size() - 1; i++) {\n\t\t\tif (array[i] > array[i + 1]) {\n\t\t\t\tint temp = array[i];\n\t\t\t\tarray[i] = array[i + 1];\n\t\t\t\tarray[i+1] = temp;\n\t\t\t\tsorted = true;\n\t\t\t}\n\t\t}\n\t\tif (!sorted)\n\t\t\tbreak;\n\t\tsorted = false;\n\t\tfor (int j = array.size() - 1; j > 0; j--) {\n\t\t\tif (array[j-1] > array[j]) {\n\t\t\t\tint temp = array[j];\n\t\t\t\tarray[j] = array[j - 1];\n\t\t\t\tarray[j - 1] = temp;\n\t\t\t\tsorted = true;\n\t\t\t}\n\t\t}\n\t}\n}\n",
-                "def cocktailSort(array):\n\tn = len(array)\tswapped = True\n\tstart = 0\n\tend = n-1\n\twhile (swapped == True):\n\t\tswapped = False\n\t\t\tif (array[i] > array[i + 1]):\n\t\tfor i in range(start, end):\n\t\t\t\tarray[i], array[i + 1] = array[i + 1], array[i]\n\t\t\t\tswapped = True\n\t\tif (swapped == False):\n\t\t\tbreak\n\t\tswapped = False\n\t\tend = end-1\n\t\tfor i in range(end-1, start-1, -1):\n\t\t\tif (array[i] > array[i + 1]):\n\t\t\t\tarray[i], array[i + 1] = array[i + 1], a[i]\n\t\t\t\tswapped = True\n\n\t\tstart = start + 1\n"
+                "The shaker sort is a quadratic sorting algorithm. It is an extension of the bubble sort. In fact, it does not only take the bigger elements to the end of the list but also alternates by bringing the smaller elements to the beginning of the list."
             );
             break;
 
@@ -174,41 +164,7 @@ function descriptionHandler()
                 "O (n<sup>2</sup>)",
                 "O (n<sup>2</sup>)",
                 "O (1)",
-                "The odd even sort is a quadratic sorting algorithm. It is similar to the bubble sort because it compares adjacent elements and puts them in order. However it does this by alternating between odd and even indices until the list is in order.",
-"void oddEvenSort(std::vector&lt;int&gt;& array) {\n\
-    bool sorted = false;\n\
-    while (!sorted) {\n\
-        sorted = true;\n\
-        for (int i = 1; i < array.size() - 1; i += 2) {\n\
-            if (array[i] > array[i+1]) {\n\
-                int temp = array[i];\n\
-                array[i] = array[i+1];\n\
-                array[i+1] = temp;\n\
-                sorted = false;\n\
-            }\n\
-        }\n\
-        for (int i = 0; i < array.size() - 1; i += 2) {\n\
-            if (array[i] > array[i+1]) {\n\
-                int temp = array[i];\n\
-                array[i] = array[i+1];\n\
-                array[i+1] = temp;\n\
-                sorted = false;\n\
-            }\n\
-        }\n\
-    }\n\
-}",
-"def odd_even_sort(array):\n\
-    sorted = False\n\
-    while not sorted:\n\
-        sorted = True\n\
-        for i in range(1, len(array)-1, 2):\n\
-            if array[i] > array[i+1]:\n\
-                array[i], array[i+1] = array[i+1], array[i]\n\
-                sorted = False\n\
-        for i in range(0, len(array)-1, 2):\n\
-            if array[i] > array[i+1]:\n\
-                array[i], array[i+1] = array[i+1], array[i]\n\
-                sorted = False"
+                "The odd even sort is a quadratic sorting algorithm. It is similar to the bubble sort because it compares adjacent elements and puts them in order. However it does this by alternating between odd and even indices until the list is in order."
             );
             break;
 
@@ -218,62 +174,8 @@ function descriptionHandler()
                 "O (n<sup>2</sup>)",
                 "O (n<sup>2</sup>)",
                 "O (1)",
-            "The pancake sort is a quadratic sorting algorithm. It derives from the pancake problem which flips the set of data until it is sorted. For each flip the biggest elements of the unsorted list get put at the end of the list.",
-"void flip(std::vector&lt;int&gt;& array, int limit) {\n\
-    int left = 0;\n\
-    while (left < limit) {\n\
-        int temp = array[left];\n\
-        array[left] = array[limit];\n\
-        array[limit] = temp;\n\
-        limit--;\n\
-        left++;\n\
-    }\n\
-}\n\
-\n\
-int maxIndex(std::vector&lt;int&gt;& array, int limit) {\n\
-    int index = 0;\n\
-    for (int i = 0; i < limit; i++) {\n\
-        if (array[i] > array[index]) {\n\
-            index = i;\n\
-        }\n\
-    }\n\
-    return index;\n\
-}\n\
-\n\
-void pancakeSort(std::vector&lt;int&gt;& array, int n) {\n\
-    int maxdex;\n\
-    while (n > 1) {\n\
-        maxdex = maxIndex(array, n);\n\
-        if (maxdex != n) {\n\
-            flip(array, maxdex);\n\
-            flip(array, n-1);\n\
-        }\n\
-        n--;\n\
-    }\n\
-}",
-"def flip(arr, k):\n\
-    left = 0\n\
-    while left < k:\n\
-        arr[left], arr[k] = arr[k], arr[left]\n\
-        k -= 1\n\
-        left += 1\n\
-\n\
-def max_index(arr, k):\n\
-    index = 0\n\
-    for i in range(k):\n\
-        if arr[i] > arr[index]:\n\
-        index = i\n\
-    return index\n\
-\n\
-def pancake_sort(arr):\n\
-    n = len(arr)\n\
-    while n > 1:\n\
-        maxdex = max_index(arr, n)\n\
-        if maxdex != n:\n\
-        flip(arr, maxdex)\n\
-        flip(arr, n - 1)\n\
-        n -= 1\n"
-            )
+            "The pancake sort is a quadratic sorting algorithm. It derives from the pancake problem which flips the set of data until it is sorted. For each flip the biggest elements of the unsorted list get put at the end of the list."
+            );
             break;
 
         case "Quick Sort":
@@ -282,67 +184,8 @@ def pancake_sort(arr):\n\
                 "O (n × log n)",
                 "O (n<sup>2</sup>)",
                 "O (n)",
-                "The quick sort is a logarithmic sorting algorithm. It is based on splitting the list into smaller sublists/partitions and sorting them recursively until the data structure is sorted. The array is divided according to a key element called the pivot. Any element bigger than the pivot is placed to the right and oppositely for the left.",
-"int partition (std::vector<int> array, int low, int high)\n\
-{\n\
-    int pivot = array[high];\n\
-    int i = (low - 1);\n\
-\n\
-    for (int j = low; j <= high- 1; j++)\n\
-    {\n\
-        if (array[j] <= pivot)\n\
-        {\n\
-            i++;\n\
-	    int temp = array[i];\n\
-            array[i] = array[j];\n\
-            array[j] = temp;\n\
-        }\n\
-    }\n\
-    int temp = array[i + 1];\n\
-    array[i + 1] = array[high];\n\
-    array[high] = temp;\n\
-    return (i + 1);\n\
-}\n\
-\n\
-void quickSort(int array[], int low, int high)\n\
-{\n\
-    if (low < high)\n\
-    {\n\
-        int pivot = partition(array, low, high);\n\
-\n\
-        quickSort(array, low, pivot - 1);\n\
-        quickSort(array, pivot + 1, high);\n\
-    }\n\
-}\n",
-"def partition(array, start, end):\n\
-    pivot = array[start]\n\
-    low = start + 1\n\
-    high = end\n\
-\n\
-    while True:\n\
-        while low <= high and array[high] >= pivot:\n\
-            high = high - 1\n\
-\n\
-        while low <= high and array[low] <= pivot:\n\
-            low = low + 1\n\
-\n\
-        if low <= high:\n\
-            array[low], array[high] = array[high], array[low]\n\
-        else:\n\
-            break\n\
-\n\
-    array[start], array[high] = array[high], array[start]\n\
-\n\
-    return high\n\
-\n\
-def quick_sort(array, start, end):\n\
-    if start >= end:\n\
-        return\n\
-\n\
-    p = partition(array, start, end)\n\
-    quick_sort(array, start, p-1)\n\
-    quick_sort(array, p+1, end)\n"
-            )
+                "The quick sort is a logarithmic sorting algorithm. It is based on splitting the list into smaller sublists/partitions and sorting them recursively until the data structure is sorted. The array is divided according to a key element called the pivot. Any element bigger than the pivot is placed to the right and oppositely for the left."
+            );
             break;
 
         default:
