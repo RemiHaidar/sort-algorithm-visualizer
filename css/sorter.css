@@ -7,3 +7,37 @@ div.vertical-line{
     margin-top: 2vh;
     border: 1px;
 }
+
+.slider {
+    -webkit-appearance: none;  
+    appearance: none;
+    height: 2em; 
+    border-radius: 20px;
+    background: #d3d3d3; 
+    outline: none; 
+    opacity: 0.7; 
+    -webkit-transition: .2s; 
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 2em; 
+    height: 2em;
+    border-radius: 50%; 
+    background: #0275d8;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 2em; 
+    height: 2em;
+    border-radius: 50%;
+    background: #0275d8;
+    cursor: pointer;
+}

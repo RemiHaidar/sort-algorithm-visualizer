@@ -1,21 +1,26 @@
-var nums = [];
-var sortType = "Quick Sort";
-var sorting = false;
-var currentImplementation = "C++";
+let nums = [];
+let sortType = "Quick Sort";
+let sorting = false;
+let currentImplementation = "C++";
+let numOfBars = 150;
+let heightFactor = numOfBars / 65;
 
 window.onload = initLines;
 window.onresize = initLines;
 
 function initLines()
 {
+    var slider = document.getElementById("numberSlider");
+    numOfBars = parseInt(slider.value);
+    heightFactor = numOfBars / 65;
+
     sorting = false;
     nums = [];
+
     // Width of container of bars
     let numberDisplayWidth = window.innerWidth * 0.8;
-    // Total number of required bars
-    let numOfBars = 150;
     // Width of one bar
-    let barWidth = numberDisplayWidth / 150;
+    let barWidth = numberDisplayWidth / numOfBars;
 
     document.getElementById("button1").textContent = "Sort";
 
@@ -28,7 +33,7 @@ function initLines()
 
     document.getElementById("numbars").innerHTML = "";
     for (let i = 0; i < nums.length; i++) {
-        let line = '<div  id="' + nums[i] + '" class="vertical-line" style="height: ' + nums[i] / 2.4 + 'vh; width: ' + barWidth + 'px;"></div>';
+        let line = '<div  id="' + nums[i] + '" class="vertical-line" style="height: ' + nums[i] / heightFactor + 'vh; width: ' + barWidth + 'px;"></div>';
         document.getElementById("numbars").innerHTML += line;
     }
 
@@ -238,8 +243,8 @@ async function bubbleSort()
                 if(nums[j] > nums[j+1]) {
                     document.getElementById(nums[j + 1]).id = nums[j];
                     document.getElementById(nums[j]).id = nums[j + 1];
-                    document.getElementById(nums[j]).style.height = nums[j] / 2.4 + "vh";
-                    document.getElementById(nums[j + 1]).style.height = nums[j + 1] / 2.4 + "vh";
+                    document.getElementById(nums[j]).style.height = nums[j] / heightFactor + "vh";
+                    document.getElementById(nums[j + 1]).style.height = nums[j + 1] / heightFactor + "vh";
                     let temp = nums[j]
                     nums[j] = nums[j + 1]
                     nums[j+1] = temp
@@ -265,8 +270,8 @@ async function selectionSort()
         if (sorting) {
             document.getElementById(nums[index]).id = nums[i];
             document.getElementById(nums[i]).id = nums[index];
-            document.getElementById(nums[index]).style.height = nums[index] / 2.4 + "vh";
-            document.getElementById(nums[i]).style.height = nums[i] / 2.4 + "vh";
+            document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
+            document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
             let temp = nums[index];
             nums[index] = nums[i];
             nums[i] = temp;
@@ -289,7 +294,7 @@ async function insertionSort()
             while (j >= 0 && nums[j] > key)
             {
                 if (sorting) {
-                    document.getElementById(nums[j + 1]).style.height = nums[j] / 2.4 + "vh";
+                    document.getElementById(nums[j + 1]).style.height = nums[j] / heightFactor + "vh";
                     document.getElementById(nums[j + 1]).id = nums[j];
                     nums[j + 1] = nums[j];
                     j -= 1;
@@ -297,7 +302,7 @@ async function insertionSort()
                 }
                 else return;
             }
-            document.getElementById(nums[j + 1]).style.height = key / 2.4 + "vh";
+            document.getElementById(nums[j + 1]).style.height = key / heightFactor + "vh";
             document.getElementById(nums[j + 1]).id = key;
             nums[j + 1] = key;
         }
@@ -322,8 +327,8 @@ async function gnomeSort()
             else {
                 document.getElementById(nums[index]).id = nums[index - 1];
                 document.getElementById(nums[index - 1]).id = nums[index];
-                document.getElementById(nums[index]).style.height = nums[index] / 2.4 + "vh";
-                document.getElementById(nums[index - 1]).style.height = nums[index - 1] / 2.4 + "vh";
+                document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
+                document.getElementById(nums[index - 1]).style.height = nums[index - 1] / heightFactor + "vh";
                 let temp = nums[index];
                 nums[index] = nums[index - 1];
                 nums[index - 1] = temp;
@@ -348,8 +353,8 @@ async function shakerSort()
                         let temp = nums[i];
                         nums[i] = nums[i + 1];
                         nums[i + 1] = temp;
-                        document.getElementById(nums[i]).style.height = nums[i] / 2.4 + "vh";
-                        document.getElementById(nums[i + 1]).style.height = nums[i + 1] / 2.4 + "vh";
+                        document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
+                        document.getElementById(nums[i + 1]).style.height = nums[i + 1] / heightFactor + "vh";
                         sorted = true;
                         await sleep(2);
                     }
@@ -370,8 +375,8 @@ async function shakerSort()
                         let temp = nums[j];
                         nums[j] = nums[j - 1];
                         nums[j - 1] = temp;
-                        document.getElementById(nums[j]).style.height = nums[j] / 2.4 + "vh";
-                        document.getElementById(nums[j - 1]).style.height = nums[j - 1] / 2.4 + "vh";
+                        document.getElementById(nums[j]).style.height = nums[j] / heightFactor + "vh";
+                        document.getElementById(nums[j - 1]).style.height = nums[j - 1] / heightFactor + "vh";
                         sorted = true;
                         await sleep(2);
                     }
@@ -393,8 +398,8 @@ async function oddEvenSort() {
                     document.getElementById(nums[i]).id = nums[i + 1];
                     [nums[i], nums[i+1]] = [nums[i+1], nums[i]]
                     sorted = false;
-                    document.getElementById(nums[i]).style.height = nums[i] / 2.4 + "vh";
-                    document.getElementById(nums[i + 1]).style.height = nums[i + 1] / 2.4 + "vh";
+                    document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
+                    document.getElementById(nums[i + 1]).style.height = nums[i + 1] / heightFactor + "vh";
                     await sleep(2);
                 }
             }
@@ -407,8 +412,8 @@ async function oddEvenSort() {
                     document.getElementById(nums[i]).id = nums[i + 1];
                     [nums[i], nums[i+1]] = [nums[i+1], nums[i]]
                     sorted = false;
-                    document.getElementById(nums[i]).style.height = nums[i] / 2.4 + "vh";
-                    document.getElementById(nums[i + 1]).style.height = nums[i + 1] / 2.4 + "vh";
+                    document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
+                    document.getElementById(nums[i + 1]).style.height = nums[i + 1] / heightFactor + "vh";
                     await sleep(2);
                 }
             }
@@ -425,8 +430,8 @@ async function flip(limit) {
         if (sorting) {
             document.getElementById(nums[limit]).id = nums[left];
             document.getElementById(nums[left]).id = nums[limit];
-            document.getElementById(nums[left]).style.height = nums[left] / 2.4 + "vh";
-            document.getElementById(nums[limit]).style.height = nums[limit] / 2.4 + "vh";
+            document.getElementById(nums[left]).style.height = nums[left] / heightFactor + "vh";
+            document.getElementById(nums[limit]).style.height = nums[limit] / heightFactor + "vh";
             [nums[left], nums[limit]] = [nums[limit], nums[left]];
             await sleep(2);
             limit--;
@@ -482,8 +487,8 @@ async function quickSort(array, start, end) {
             if (start < end) {
                 document.getElementById(array[end]).id = array[start];
                 document.getElementById(array[start]).id = array[end];
-                document.getElementById(array[start]).style.height = array[start] / 2.4 + "vh";
-                document.getElementById(array[end]).style.height = array[end] / 2.4 + "vh";
+                document.getElementById(array[start]).style.height = array[start] / heightFactor + "vh";
+                document.getElementById(array[end]).style.height = array[end] / heightFactor + "vh";
 
                 let temp = array[start];
                 array[start] = array[end];
