@@ -8,6 +8,12 @@ let heightFactor = numOfBars / 65;
 window.onload = initLines;
 window.onresize = initLines;
 
+function setSliderValue()
+{
+    var slider = document.getElementById("numberSlider");
+    numOfBars = parseInt(slider.value);
+    slider.title = slider.value;
+}
 
 function initLines()
 {
