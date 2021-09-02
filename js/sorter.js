@@ -8,15 +8,17 @@ let heightFactor = numOfBars / 65;
 window.onload = initLines;
 window.onresize = initLines;
 
+
 function initLines()
 {
     var slider = document.getElementById("numberSlider");
     numOfBars = parseInt(slider.value);
+    slider.title = slider.value;
     heightFactor = numOfBars / 65;
 
     sorting = false;
     nums = [];
-
+    
     // Width of container of bars
     let numberDisplayWidth = window.innerWidth * 0.8;
     // Width of one bar
@@ -33,7 +35,7 @@ function initLines()
 
     document.getElementById("numbars").innerHTML = "";
     for (let i = 0; i < nums.length; i++) {
-        let line = '<div  id="' + nums[i] + '" class="vertical-line" style="height: ' + nums[i] / heightFactor + 'vh; width: ' + barWidth + 'px;"></div>';
+        let line = '<div  id="' + nums[i] + '" class="vertical-line" style="height: ' + nums[i] / heightFactor + 'vh; width: ' + barWidth + 'px;" data-bs-toggle="tooltip" data-bs-placement="top" title="' + nums[i] + '"></div>';
         document.getElementById("numbars").innerHTML += line;
     }
 
@@ -94,9 +96,8 @@ function sortHandler()
             quickSort(nums);
             break;
 
-        case "Merge Sort":
-            let temp = nums;
-            nums = mergeSort(temp);
+        case "Radix Sort":
+            radixSort();
             break;
 
         default:
@@ -104,9 +105,11 @@ function sortHandler()
     }
 }
 
-function description(bCase, aCase, wCase, sComp, desc, cCode, pCode)
+function description(bCase, aCase, wCase, sComp, desc)
 {
-    let code = '<div style="width: 80%; margin-top: 5vh;" class="container-fluid"><div class="row"><div class="col-sm"><table class="table table-dark table-striped table-bordered table-hover" style="table-layout: fixed;"><th colspan="2" class="table-active"><center>Time Complexity</center></th><tbody><tr><th>Best Case</th><th>' + bCase + '</th></tr><tr><th>Average Case</th><th>' + aCase + '</th></tr><tr><th>Worst Case</th><th>' + wCase + '</th></tr><th colspan="2" class="table-active"><center>Space Complexity</center></th><tr><th>Space Complexity</th><th>' + sComp + '</th></tr></tbody></table></div><div class="col-sm"><div class="card"><div class="card-body"><center><h3 class="card-title">Description</h3></center><h5><p class="card-text">' + desc + '</p></h5></div></div></div></div></div><br><br><br><br></br>';
+    let complexity_table = '<div style="width: 80%; margin-top: 3vh;" class="container-fluid"><div class="row"><div class="col-sm"><table class="table table-dark table-striped table-bordered table-hover shadow-lg" style="table-layout: fixed;"><th colspan="2" class="table-active"><center><h4>Time Complexity</h4></center></th><tbody><tr><th>Best Case</th><th>' + bCase + '</th></tr><tr><th>Average Case</th><th>' + aCase + '</th></tr><tr><th>Worst Case</th><th>' + wCase + '</th></tr><th colspan="2" class="table-active"><center>Space Complexity</center></th><tr><th>Space Complexity</th><th>' + sComp + '</th></tr></tbody></table></div>';
+    let d = '<div class="col-sm"><div class="card shadow-lg"><div class="card-body"><center><h3 class="card-title">Description</h3></center><h5><p class="card-text">' + desc + '</p></h5></div></div></div></div></div>';
+    let code = complexity_table + d;
     return code;
 }
 
@@ -139,7 +142,7 @@ function descriptionHandler()
                 "O (n<sup>2</sup>)",
                 "O (n<sup>2</sup>)",
                 "O (1)", 
-                "The insertion sort is a quadratic sorting algorithm. It virtually splits the array into a into two sublists : a sorted one and an unsorted one. The algorithm takes an element from the unsorted list and correctly places it in the other list. It  is not efficient for large sets of data."
+                "The insertion sort is a quadratic sorting algorithm. It virtually splits the array leto a leto two sublists : a sorted one and an unsorted one. The algorithm takes an element from the unsorted list and correctly places it in the other list. It  is not efficient for large sets of data."
             );
             break;
 
@@ -189,7 +192,7 @@ function descriptionHandler()
                 "O (n × log n)",
                 "O (n<sup>2</sup>)",
                 "O (n)",
-                "The quick sort is a logarithmic sorting algorithm. It is based on splitting the list into smaller sublists/partitions and sorting them recursively until the data structure is sorted. The array is divided according to a key element called the pivot. Any element bigger than the pivot is placed to the right and oppositely for the left."
+                "The quick sort is a logarithmic sorting algorithm. It is based on splitting the list leto smaller sublists/partitions and sorting them recursively until the data structure is sorted. The array is divided according to a key element called the pivot. Any element bigger than the pivot is placed to the right and oppositely for the left."
             );
             break;
 
@@ -515,30 +518,18 @@ async function quickSort(array, start, end) {
     }
 }
 
-// !
-
-function mergeSort(arr) {
-    const half = arr.length / 2
-  
-    if (arr.length < 2){
-      return arr
-    }
-  
-    const left = arr.splice(0, half)
-    return merge(mergeSort(left),mergeSort(arr))
-  }
-  
-function merge(left, right) {
-    let arr = []
-
-    while (left.length && right.length) {
-        if (left[0] < right[0]) {
-            arr.push(left.shift())
-        } 
-        else {
-            arr.push(right.shift())
+function radixSort() {
+    const base = 10;
+    let divider = 1;
+    let maxVal = Number.NEGATIVE_INFINITY;
+    while (divider === 1 || divider <= maxVal) {
+        const buckets = [...Array(10)].map(() => []);
+        for (let i = 0; i < nums.length; i++) {
+            buckets[Math.floor((val / divider) % base)].push(val);
+            maxVal = val > maxVal ? val : maxVal;
         }
-    }
-
-    return [ ...arr, ...left, ...right ]
-}
+        nums = [].concat(...buckets);
+        console.log([].concat(...buckets));
+        divider *= base;
+    };
+ };
