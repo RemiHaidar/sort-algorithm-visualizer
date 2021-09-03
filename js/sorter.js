@@ -102,8 +102,8 @@ function sortHandler()
             quickSort(nums);
             break;
 
-        case "Radix Sort":
-            radixSort();
+        case "Bogo Sort":
+            bogoSort();
             break;
 
         default:
@@ -524,18 +524,57 @@ async function quickSort(array, start, end) {
     }
 }
 
-function radixSort() {
-    const base = 10;
-    let divider = 1;
-    let maxVal = Number.NEGATIVE_INFINITY;
-    while (divider === 1 || divider <= maxVal) {
-        const buckets = [...Array(10)].map(() => []);
-        for (let i = 0; i < nums.length; i++) {
-            buckets[Math.floor((val / divider) % base)].push(val);
-            maxVal = val > maxVal ? val : maxVal;
+function isSorted() {
+    for(let i = 1; i < nums.length; i++){
+        if (nums[i-1] > nums[i]) {
+            return false;
         }
-        nums = [].concat(...buckets);
-        console.log([].concat(...buckets));
-        divider *= base;
-    };
- };
+    }
+    return true;
+}
+
+async function shuffle() {
+    let count = nums.length;
+    while(count > 0) {
+        if (sorting) {
+            let index = Math.floor(Math.random() * count);
+            count--;
+
+            // Avoid swapping the same index
+            if (count != index) {
+                if (count < index) {
+                    document.getElementById(nums[index]).id = nums[count];
+                    document.getElementById(nums[count]).id = nums[index];
+                    document.getElementById(nums[count]).style.height = nums[count] / heightFactor + "vh";
+                    document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
+                }
+                else {
+                    document.getElementById(nums[count]).id = nums[index];
+                    document.getElementById(nums[index]).id = nums[count];
+                    document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
+                    document.getElementById(nums[count]).style.height = nums[count] / heightFactor + "vh";
+                }
+
+                let temp = nums[count];
+                nums[count] = nums[index];
+                nums[index] = temp;
+            }
+
+            await sleep(20);
+        }
+        else return;
+    }
+}
+
+async function bogoSort()
+{
+    let sorted = false;
+    while(!isSorted(nums)) {
+        await shuffle();
+
+        if (!sorting)
+            return;
+    }
+
+    document.getElementById("button1").textContent = "Sort";
+}
