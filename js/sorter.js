@@ -106,14 +106,19 @@ function sortHandler()
             bogoSort();
             break;
 
+        case "Comb Sort":
+            combSort();
+            break;
+
         default:
+            alert(sortType + " has not been added yet!");
             break;
     }
 }
 
 function description(bCase, aCase, wCase, sComp, desc)
 {
-    let complexity_table = '<div style="width: 80%; margin-top: 3vh;" class="container-fluid"><div class="row"><div class="col-sm"><table class="table table-dark table-striped table-bordered table-hover shadow-lg" style="table-layout: fixed;"><th colspan="2" class="table-active"><center><h4>Time Complexity</h4></center></th><tbody><tr><th>Best Case</th><th>' + bCase + '</th></tr><tr><th>Average Case</th><th>' + aCase + '</th></tr><tr><th>Worst Case</th><th>' + wCase + '</th></tr><th colspan="2" class="table-active"><center>Space Complexity</center></th><tr><th>Space Complexity</th><th>' + sComp + '</th></tr></tbody></table></div>';
+    let complexity_table = '<div style="width: 80%; margin-top: 3vh;" class="container-fluid"><div class="row"><div class="col-sm"><table class="table table-dark table-striped table-bordered table-hover shadow-lg" style="table-layout: fixed;"><th colspan="2" class="table-active"><center><h4>Time Complexity</h4></center></th><tbody><tr><th>Best Case</th><th>' + bCase + '</th></tr><tr><th>Average Case</th><th>' + aCase + '</th></tr><tr><th>Worst Case</th><th>' + wCase + '</th></tr><th colspan="2" class="table-active"><center><h4>Space Complexity</h4></center></th><tr><th>Space Complexity</th><th>' + sComp + '</th></tr></tbody></table></div>';
     let d = '<div class="col-sm"><div class="card shadow-lg"><div class="card-body"><center><h3 class="card-title">Description</h3></center><h5><p class="card-text">' + desc + '</p></h5></div></div></div></div></div>';
     let code = complexity_table + d;
     return code;
@@ -202,8 +207,25 @@ function descriptionHandler()
             );
             break;
 
+        case "Bogo Sort":
+            document.getElementById("description").innerHTML = description(
+                "O (n)",
+                "O (n &#215; n!)",
+                "&infin;",
+                "O (n)",
+                "The bogo sort is a particularly ineffective algorithm based on generate and test paradigm. The algorithm successively generates permutations of its input until it finds one that is sorted. It can be compared to throwing a mixed packet of cards in the air and picking it back up until the deck is sorted."
+            )
+            break;
+
+        case "Comb Sort":
+            document.getElementById("description").innerHTML = description(
+                
+            )
+            break;
+
         default:
             document.getElementById("description").innerHTML = "";
+            alert("The " + sortType + " has not been added yet.")
             break;
     }
 }
@@ -578,3 +600,37 @@ async function bogoSort()
 
     document.getElementById("button1").textContent = "Sort";
 }
+
+async function combSort()
+{
+    let length = nums.length;
+    let shrink = 1.3;
+    let gap = length;
+    let sorted = false;
+
+    while (!sorted) {
+        gap = parseInt(gap / shrink);
+        if (gap <= 1) {
+            sorted = true;
+            gap = 1;
+        }
+
+        for (let i = 0; i < length - gap; i++) {
+            if (sorting) {
+                if (nums[i] > nums[gap + i]) {
+                    document.getElementById(nums[gap + i]).id = nums[i];
+                    document.getElementById(nums[i]).id = nums[gap + i];
+                    document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
+                    document.getElementById(nums[gap + i]).style.height = nums[gap + i] / heightFactor + "vh";
+                    [nums[i], nums[gap + i]] = [nums[gap + i], nums[i]]
+                    sorted = false;
+                    await sleep(20);
+                }
+            }
+        }
+    }
+
+    document.getElementById("button1").textContent = "Sort";
+}
+
+// TODO replace create swap function which *also* switches tooltips
