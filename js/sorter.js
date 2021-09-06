@@ -111,7 +111,6 @@ function sortHandler()
             break;
 
         default:
-            alert(sortType + " has not been added yet!");
             break;
     }
 }
@@ -224,8 +223,7 @@ function descriptionHandler()
             break;
 
         default:
-            document.getElementById("description").innerHTML = "";
-            alert("The " + sortType + " has not been added yet.")
+            document.getElementById("description").innerHTML = "<center>This algorithm has not been added yet.</center>";
             break;
     }
 }
