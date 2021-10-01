@@ -260,29 +260,48 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function swap(index1, index2)
+{
+    if (index1 > index2) {
+        document.getElementById(nums[index2]).title = nums[index1];
+        document.getElementById(nums[index1]).title = nums[index2];
+        document.getElementById(nums[index1]).id = nums[index2];
+        document.getElementById(nums[index2]).id = nums[index1];
+        document.getElementById(nums[index2]).style.height = nums[index2] / heightFactor + "vh";
+        document.getElementById(nums[index1]).style.height = nums[index1] / heightFactor + "vh";
+    }
+    else {
+        document.getElementById(nums[index1]).title = nums[index2];
+        document.getElementById(nums[index2]).title = nums[index1];
+        document.getElementById(nums[index2]).id = nums[index1];
+        document.getElementById(nums[index1]).id = nums[index2];
+        document.getElementById(nums[index1]).style.height = nums[index1] / heightFactor + "vh";
+        document.getElementById(nums[index2]).style.height = nums[index2] / heightFactor + "vh";
+    }
+
+    let temp = nums[index1]
+    nums[index1] = nums[index2]
+    nums[index2] = temp
+}
+
 // -------------------------
 //   *  Sort Algorithms  *  
 // -------------------------
 
 async function bubbleSort()
 {
-    for(let i = 0; i < nums.length; i++) {
-        for(let j = 0; j < ( nums.length - i -1 ); j++) {
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = 0; j < ( nums.length - i -1 ); j++) {
             if (sorting) {
                 if(nums[j] > nums[j+1]) {
-                    document.getElementById(nums[j + 1]).id = nums[j];
-                    document.getElementById(nums[j]).id = nums[j + 1];
-                    document.getElementById(nums[j]).style.height = nums[j] / heightFactor + "vh";
-                    document.getElementById(nums[j + 1]).style.height = nums[j + 1] / heightFactor + "vh";
-                    let temp = nums[j]
-                    nums[j] = nums[j + 1]
-                    nums[j+1] = temp
+                    swap(j, j + 1);
                     await sleep(2);
                 }
             }
             else return;
         }
     }
+
     document.getElementById("button1").textContent = "Sort";
 }
 
@@ -297,13 +316,7 @@ async function selectionSort()
         } 
         
         if (sorting) {
-            document.getElementById(nums[index]).id = nums[i];
-            document.getElementById(nums[i]).id = nums[index];
-            document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
-            document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
-            let temp = nums[index];
-            nums[index] = nums[i];
-            nums[i] = temp;
+            swap(index, i);
             await sleep(20);
         }
         else return;
@@ -354,13 +367,7 @@ async function gnomeSort()
                 await sleep(2);
             }
             else {
-                document.getElementById(nums[index]).id = nums[index - 1];
-                document.getElementById(nums[index - 1]).id = nums[index];
-                document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
-                document.getElementById(nums[index - 1]).style.height = nums[index - 1] / heightFactor + "vh";
-                let temp = nums[index];
-                nums[index] = nums[index - 1];
-                nums[index - 1] = temp;
+                swap(index, index - 1);
                 index--;
                 await sleep(2);
             }
@@ -377,13 +384,7 @@ async function shakerSort()
             for (let i = 0; i < nums.length - 1; i++) {
                 if (sorting) {
                     if (nums[i] > nums[i + 1]) {
-                        document.getElementById(nums[i + 1]).id = nums[i];
-                        document.getElementById(nums[i]).id = nums[i + 1];
-                        let temp = nums[i];
-                        nums[i] = nums[i + 1];
-                        nums[i + 1] = temp;
-                        document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
-                        document.getElementById(nums[i + 1]).style.height = nums[i + 1] / heightFactor + "vh";
+                        swap(i + 1, i);
                         sorted = true;
                         await sleep(2);
                     }
@@ -399,13 +400,7 @@ async function shakerSort()
             for (let j = nums.length - 1; j > 0; j--) {
                 if (sorting) {
                     if (nums[j-1] > nums[j]) {
-                        document.getElementById(nums[j]).id = nums[j - 1];
-                        document.getElementById(nums[j - 1]).id = nums[j];
-                        let temp = nums[j];
-                        nums[j] = nums[j - 1];
-                        nums[j - 1] = temp;
-                        document.getElementById(nums[j]).style.height = nums[j] / heightFactor + "vh";
-                        document.getElementById(nums[j - 1]).style.height = nums[j - 1] / heightFactor + "vh";
+                        swap(j, j - 1);
                         sorted = true;
                         await sleep(2);
                     }
@@ -423,12 +418,8 @@ async function oddEvenSort() {
         for (let i = 1; i < nums.length - 1; i += 2) {
             if (sorting) {
                 if (nums[i] > nums[i+1]) {
-                    document.getElementById(nums[i + 1]).id = nums[i];
-                    document.getElementById(nums[i]).id = nums[i + 1];
-                    [nums[i], nums[i+1]] = [nums[i+1], nums[i]]
+                    swap(i + 1, i);
                     sorted = false;
-                    document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
-                    document.getElementById(nums[i + 1]).style.height = nums[i + 1] / heightFactor + "vh";
                     await sleep(2);
                 }
             }
@@ -437,12 +428,8 @@ async function oddEvenSort() {
         for (let i = 0; i < nums.length - 1; i += 2) {
             if (sorting) {
                 if (nums[i] > nums[i+1]) {
-                    document.getElementById(nums[i + 1]).id = nums[i];
-                    document.getElementById(nums[i]).id = nums[i + 1];
-                    [nums[i], nums[i+1]] = [nums[i+1], nums[i]]
+                    swap(i + 1, i);
                     sorted = false;
-                    document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
-                    document.getElementById(nums[i + 1]).style.height = nums[i + 1] / heightFactor + "vh";
                     await sleep(2);
                 }
             }
@@ -457,11 +444,7 @@ async function flip(limit) {
     let left = 0;
     while (left < limit) {
         if (sorting) {
-            document.getElementById(nums[limit]).id = nums[left];
-            document.getElementById(nums[left]).id = nums[limit];
-            document.getElementById(nums[left]).style.height = nums[left] / heightFactor + "vh";
-            document.getElementById(nums[limit]).style.height = nums[limit] / heightFactor + "vh";
-            [nums[left], nums[limit]] = [nums[limit], nums[left]];
+            swap(limit, left);
             await sleep(2);
             limit--;
             left++;
@@ -514,15 +497,7 @@ async function quickSort(array, start, end) {
         while (array[end] > pivot) end--;
         if (sorting) {
             if (start < end) {
-                document.getElementById(array[end]).id = array[start];
-                document.getElementById(array[start]).id = array[end];
-                document.getElementById(array[start]).style.height = array[start] / heightFactor + "vh";
-                document.getElementById(array[end]).style.height = array[end] / heightFactor + "vh";
-
-                let temp = array[start];
-                array[start] = array[end];
-                array[end] = temp;
-
+                swap(end, start);
                 await sleep(20);
             }
         }
@@ -563,21 +538,11 @@ async function shuffle() {
             // Avoid swapping the same index
             if (count != index) {
                 if (count < index) {
-                    document.getElementById(nums[index]).id = nums[count];
-                    document.getElementById(nums[count]).id = nums[index];
-                    document.getElementById(nums[count]).style.height = nums[count] / heightFactor + "vh";
-                    document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
+                    swap(index, count);
                 }
                 else {
-                    document.getElementById(nums[count]).id = nums[index];
-                    document.getElementById(nums[index]).id = nums[count];
-                    document.getElementById(nums[index]).style.height = nums[index] / heightFactor + "vh";
-                    document.getElementById(nums[count]).style.height = nums[count] / heightFactor + "vh";
+                    swap(index, count);
                 }
-
-                let temp = nums[count];
-                nums[count] = nums[index];
-                nums[index] = temp;
             }
 
             await sleep(20);
@@ -616,11 +581,7 @@ async function combSort()
         for (let i = 0; i < length - gap; i++) {
             if (sorting) {
                 if (nums[i] > nums[gap + i]) {
-                    document.getElementById(nums[gap + i]).id = nums[i];
-                    document.getElementById(nums[i]).id = nums[gap + i];
-                    document.getElementById(nums[i]).style.height = nums[i] / heightFactor + "vh";
-                    document.getElementById(nums[gap + i]).style.height = nums[gap + i] / heightFactor + "vh";
-                    [nums[i], nums[gap + i]] = [nums[gap + i], nums[i]]
+                    swap(gap + i, i);
                     sorted = false;
                     await sleep(20);
                 }
@@ -630,5 +591,3 @@ async function combSort()
 
     document.getElementById("button1").textContent = "Sort";
 }
-
-// TODO replace create swap function which *also* switches tooltips
